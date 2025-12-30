@@ -59,18 +59,6 @@
             overflow: hidden;
         }
 
-        .header-content::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, var(--secondary) 0%, transparent 70%);
-            opacity: 0.2;
-            z-index: 0;
-        }
-
         h1 {
             font-family: 'Dancing Script', cursive;
             font-size: 4.5rem;
@@ -113,6 +101,30 @@
             margin-top: 15px;
             position: relative;
             z-index: 1;
+        }
+
+        /* Precious Main Photo */
+        .precious-main-photo {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            margin: 25px auto;
+            border: 8px solid var(--secondary);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+        }
+
+        .precious-main-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .precious-main-photo:hover img {
+            transform: scale(1.05);
         }
 
         /* Balloons */
@@ -339,6 +351,67 @@
             color: #999;
         }
 
+        /* Precious Photo Gallery */
+        .precious-gallery {
+            margin: 50px 0;
+        }
+
+        .gallery-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            height: 280px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 15px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
         /* Video Section */
         .video-section {
             margin: 50px 0;
@@ -364,6 +437,13 @@
             justify-content: center;
         }
 
+        .custom-video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: none;
+        }
+
         .video-placeholder {
             width: 100%;
             height: 400px;
@@ -382,125 +462,43 @@
             color: var(--secondary);
         }
 
-        .video-playlist {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 25px;
+        /* Custom Audio Player */
+        .audio-player {
+            background: linear-gradient(to right, var(--accent), #8A84E2);
+            color: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 10px 20px rgba(106, 103, 206, 0.3);
         }
 
-        .video-thumbnail {
-            position: relative;
-            border-radius: 10px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            aspect-ratio: 16/9;
+        .audio-player-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
         }
 
-        .video-thumbnail:hover {
-            transform: scale(1.05);
-        }
-
-        .video-thumbnail img {
+        .custom-audio {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            margin-bottom: 15px;
         }
 
-        .video-thumbnail.active {
-            outline: 3px solid var(--secondary);
-            outline-offset: 3px;
-        }
-
-        .video-thumbnail .play-icon {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.7);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-        }
-
-        .video-title {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            color: white;
-            padding: 10px;
-            font-size: 0.9rem;
-        }
-
-        .video-controls {
+        .audio-controls {
             display: flex;
             justify-content: center;
             gap: 15px;
             margin-top: 20px;
-        }
-
-        .video-btn {
-            background: var(--secondary);
-            color: var(--dark);
-            border: none;
-            padding: 12px 25px;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .video-btn:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Music Player */
-        .music-player {
-            background: linear-gradient(to right, var(--accent), #8A84E2);
-            color: white;
-            border-radius: 20px;
-            padding: 20px;
-            margin: 30px 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             flex-wrap: wrap;
-            box-shadow: 0 10px 20px rgba(106, 103, 206, 0.3);
         }
 
-        .music-info {
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .music-controls {
-            display: flex;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .music-btn {
+        .audio-btn {
             background: white;
             color: var(--accent);
             border: none;
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
@@ -508,53 +506,16 @@
             justify-content: center;
         }
 
-        .music-btn:hover {
+        .audio-btn:hover {
             transform: scale(1.1);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            background: var(--secondary);
         }
 
-        /* Photo Gallery */
-        .photo-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .photo-frame {
-            border-radius: 15px;
-            overflow: hidden;
-            height: 200px;
-            position: relative;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.5s ease;
-        }
-
-        .photo-frame:hover {
-            transform: scale(1.05);
-        }
-
-        .photo-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .photo-frame:hover img {
-            transform: scale(1.1);
-        }
-
-        .photo-label {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 10px;
+        .song-info {
             text-align: center;
-            font-weight: 600;
-            color: var(--accent);
+            margin-top: 15px;
+            font-size: 1.1rem;
         }
 
         /* Countdown Timer */
@@ -636,14 +597,16 @@
             .messages-grid { grid-template-columns: 1fr; }
             .message-header { flex-direction: column; text-align: center; }
             .message-avatar { margin-right: 0; margin-bottom: 15px; }
+            .audio-controls { flex-wrap: wrap; }
+            .precious-main-photo { width: 180px; height: 180px; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 480px) {
             h1 { font-size: 2.5rem; }
             .main-content { grid-template-columns: 1fr; }
-            .music-player { flex-direction: column; gap: 20px; }
-            .video-playlist { grid-template-columns: 1fr; }
-            .video-controls { flex-direction: column; align-items: center; }
+            .gallery-grid { grid-template-columns: 1fr; }
+            .precious-main-photo { width: 150px; height: 150px; }
         }
     </style>
 </head>
@@ -663,12 +626,16 @@
                 <h1>Happy Birthday!</h1>
                 <div class="subtitle">Celebrating an Amazing Soul</div>
                 <div class="birthday-girl">Precious Yisa</div>
-                <div class="date">🎉 Today is your special day! 🎉</div>
                 
-                <!-- Cake Icon -->
-                <div style="font-size: 4rem; margin-top: 20px; color: var(--primary);">
-                    🎂
+                <!-- =========================================== -->
+                <!-- PRECIOUS MAIN PHOTO - ADD YOUR PHOTO HERE -->
+                <!-- =========================================== -->
+                <div class="precious-main-photo">
+                    <!-- REPLACE THIS IMAGE WITH PRECIOUS'S PHOTO -->
+                    <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Precious Yisa">
                 </div>
+                
+                <div class="date">🎉 Today is your special day! 🎉</div>
             </div>
         </header>
 
@@ -692,71 +659,165 @@
             </div>
         </div>
 
+        <!-- =========================================== -->
+        <!-- PRECIOUS'S PHOTO GALLERY - ADD PHOTOS HERE -->
+        <!-- =========================================== -->
+        <section class="precious-gallery">
+            <div class="gallery-container">
+                <h2 class="card-title">
+                    <i class="fas fa-images"></i> Precious's Beautiful Moments
+                </h2>
+                <div class="gallery-grid" id="preciousGallery">
+                    <!-- Photo 1 - Replace with Precious's photo -->
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Precious at School">
+                        <div class="gallery-caption">At AGGS School</div>
+                    </div>
+                    
+                    <!-- Photo 2 - Replace with Precious's photo -->
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Precious with Friends">
+                        <div class="gallery-caption">With Friends</div>
+                    </div>
+                    
+                    <!-- Photo 3 - Replace with Precious's photo -->
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1545696563-af8f6ec2295a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Precious Celebrating">
+                        <div class="gallery-caption">Celebration Time</div>
+                    </div>
+                    
+                    <!-- Photo 4 - Replace with Precious's photo -->
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Precious Smiling">
+                        <div class="gallery-caption">Beautiful Smile</div>
+                    </div>
+                    
+                    <!-- Photo 5 - Replace with Precious's photo -->
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Precious with Family">
+                        <div class="gallery-caption">Family Moments</div>
+                    </div>
+                    
+                    <!-- Photo 6 - Replace with Precious's photo -->
+                    <div class="gallery-item">
+                        <img src="https://images.unsplash.com/photo-1584302179602-e76e20f6c7e6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Precious Special Day">
+                        <div class="gallery-caption">Special Moments</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Audio Player -->
+        <section class="audio-player">
+            <h2 class="audio-player-title">
+                <i class="fas fa-music"></i> Birthday Music Playlist
+            </h2>
+            
+            <!-- AUDIO FILE 1 - Change the src attribute to your audio file -->
+            <div class="song-info">Song 1: Happy Birthday Classic</div>
+            <audio class="custom-audio" id="audio1" controls>
+                <!-- REPLACE THIS URL WITH YOUR AUDIO FILE -->
+                <source src="https://assets.mixkit.co/music/preview/mixkit-happy-birthday-to-you-443.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            
+            <!-- AUDIO FILE 2 - Change the src attribute to your audio file -->
+            <div class="song-info">Song 2: Celebration Time</div>
+            <audio class="custom-audio" id="audio2" controls>
+                <!-- REPLACE THIS URL WITH YOUR AUDIO FILE -->
+                <source src="pre.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            
+            <!-- AUDIO FILE 3 - Change the src attribute to your audio file -->
+            <div class="song-info">Song 3: Joyful Moments</div>
+            <audio class="custom-audio" id="audio3" controls>
+                <!-- REPLACE THIS URL WITH YOUR AUDIO FILE -->
+                <source src="precious.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            
+            <div class="audio-controls">
+                <button class="audio-btn" id="playAllBtn">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button class="audio-btn" id="pauseAllBtn">
+                    <i class="fas fa-pause"></i>
+                </button>
+                <button class="audio-btn" id="stopAllBtn">
+                    <i class="fas fa-stop"></i>
+                </button>
+                <button class="audio-btn" id="volumeUpBtn">
+                    <i class="fas fa-volume-up"></i>
+                </button>
+                <button class="audio-btn" id="volumeDownBtn">
+                    <i class="fas fa-volume-down"></i>
+                </button>
+            </div>
+        </section>
+
         <!-- Video Section -->
         <section class="video-section">
             <div class="video-container">
                 <h2 class="card-title" style="color: white; border-bottom-color: var(--secondary);">
-                    <i class="fas fa-video"></i> Birthday Celebration Videos
+                    <i class="fas fa-video"></i> Birthday Videos
                 </h2>
                 
                 <div class="video-player" id="videoPlayer">
                     <div class="video-placeholder" id="videoPlaceholder">
                         <i class="fas fa-play-circle"></i>
-                        <h3 style="margin-bottom: 10px;">Click a video below to play</h3>
-                        <p>Enjoy these special birthday celebration videos curated just for Precious!</p>
+                        <h3 style="margin-bottom: 10px;">Select a video to play</h3>
+                        <p>Enjoy these special birthday videos!</p>
                     </div>
-                    <iframe id="youtubePlayer" width="100%" height="100%" frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen style="display: none;">
-                    </iframe>
+                    
+                    <!-- VIDEO FILE 1 - Change the src attribute to your video file -->
+                    <video class="custom-video" id="customVideo1" controls>
+                        <!-- REPLACE THIS URL WITH YOUR VIDEO FILE -->
+                        <source src="https://assets.mixkit.co/videos/preview/mixkit-balloons-flying-over-a-garden-3782-large.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    
+                    <!-- VIDEO FILE 2 - Change the src attribute to your video file -->
+                    <video class="custom-video" id="customVideo2" controls>
+                        <!-- REPLACE THIS URL WITH YOUR VIDEO FILE -->
+                        <source src="https://assets.mixkit.co/videos/preview/mixkit-sparkling-candles-on-a-birthday-cake-4151-large.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    
+                    <!-- VIDEO FILE 3 - Change the src attribute to your video file -->
+                    <video class="custom-video" id="customVideo3" controls>
+                        <!-- REPLACE THIS URL WITH YOUR VIDEO FILE -->
+                        <source src="https://assets.mixkit.co/videos/preview/mixkit-hands-throwing-confetti-against-a-blue-sky-3632-large.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                 </div>
                 
-                <div class="video-controls">
-                    <button class="video-btn" id="playVideoBtn">
-                        <i class="fas fa-play"></i> Play Selected Video
+                <div class="audio-controls">
+                    <button class="audio-btn video-select-btn" data-video="1">
+                        <i class="fas fa-birthday-cake"></i>
                     </button>
-                    <button class="video-btn" id="pauseVideoBtn">
-                        <i class="fas fa-pause"></i> Pause
+                    <button class="audio-btn video-select-btn" data-video="2">
+                        <i class="fas fa-candle"></i>
                     </button>
-                    <button class="video-btn" id="fullscreenBtn">
-                        <i class="fas fa-expand"></i> Fullscreen
+                    <button class="audio-btn video-select-btn" data-video="3">
+                        <i class="fas fa-party-horn"></i>
+                    </button>
+                    <button class="audio-btn" id="playVideoBtn">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button class="audio-btn" id="pauseVideoBtn">
+                        <i class="fas fa-pause"></i>
+                    </button>
+                    <button class="audio-btn" id="fullscreenBtn">
+                        <i class="fas fa-expand"></i>
                     </button>
                 </div>
                 
-                <div class="video-playlist" id="videoPlaylist">
-                    <!-- Videos will be added here by JavaScript -->
+                <div style="text-align: center; margin-top: 15px; color: white;">
+                    <p>Click cake, candle, or party horn icons to select different birthday videos</p>
                 </div>
             </div>
         </section>
-
-        <!-- Music Player -->
-        <div class="music-player">
-            <div class="music-info">
-                <h3>🎵 Birthday Celebration Playlist</h3>
-                <p>Play some music to make the party even better!</p>
-                <div class="music-controls">
-                    <button class="music-btn" id="playBtn">
-                        <i class="fas fa-play"><audio controls>
-        <source src="precious.mp3" type="audio/mpeg">
-        
-        Your browser does not support the audio element.
-    </audio></i>
-                    </button>
-                    <button class="music-btn" id="pauseBtn">
-                        <i class="fas fa-pause"></i>
-                    </button>
-                    <button class="music-btn" id="nextBtn">
-                        <i class="fas fa-forward"></i>
-                    </button>
-                </div>
-            </div>
-            <div style="flex: 1; min-width: 250px;">
-                <p>Now Playing: <span id="songTitle">Happy Birthday - Stevie Wonder</span></p>
-                <div style="width: 100%; height: 10px; background: rgba(255,255,255,0.3); border-radius: 5px; margin-top: 10px;">
-                    <div id="progressBar" style="width: 30%; height: 100%; background: white; border-radius: 5px;"></div>
-                </div>
-            </div>
-        </div>
 
         <!-- Main Content Cards -->
         <div class="main-content">
@@ -789,19 +850,24 @@
             <!-- Photo Gallery Card -->
             <div class="card">
                 <div class="card-icon">📸</div>
-                <h2 class="card-title">Memories</h2>
-                <div class="photo-gallery">
-                    <div class="photo-frame">
+                <h2 class="card-title">More Memories</h2>
+                <div class="gallery-grid" style="margin-top: 20px;">
+                    <!-- Additional Photo 1 -->
+                    <div class="gallery-item">
                         <img src="https://images.unsplash.com/photo-1518568814500-bf0f8d125f46?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Celebration">
-                        <div class="photo-label">Celebration</div>
+                        <div class="gallery-caption">Happy Times</div>
                     </div>
-                    <div class="photo-frame">
+                    
+                    <!-- Additional Photo 2 -->
+                    <div class="gallery-item">
                         <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Joyful Moments">
-                        <div class="photo-label">Joyful Moments</div>
+                        <div class="gallery-caption">Joyful Moments</div>
                     </div>
-                    <div class="photo-frame">
+                    
+                    <!-- Additional Photo 3 -->
+                    <div class="gallery-item">
                         <img src="https://images.unsplash.com/photo-1545696563-af8f6ec2295a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Birthday Cake">
-                        <div class="photo-label">Sweet Treats</div>
+                        <div class="gallery-caption">Sweet Treats</div>
                     </div>
                 </div>
             </div>
@@ -827,11 +893,29 @@
                 🎉 🎂 🎈
             </div>
             <h2 style="color: var(--accent); margin-bottom: 10px;">Once Again, Happy Birthday Precious!</h2>
+            
+            <!-- Final Photo of Precious -->
+            <div style="margin: 30px auto; width: 200px; height: 200px; border-radius: 50%; overflow: hidden; border: 8px solid var(--secondary);">
+                <!-- REPLACE THIS WITH PRECIOUS'S FINAL PHOTO -->
+                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Precious Yisa" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            
             <p>May your day be filled with joy, laughter, and wonderful surprises.</p>
             <div class="footer-heart" style="margin-top: 20px;">
                 ❤️
             </div>
             <p style="margin-top: 20px; font-size: 0.9rem; color: #666;">Made with love for Precious Yisa's special day</p>
+            
+            <!-- Easy Editing Instructions -->
+            <div style="margin-top: 30px; padding: 15px; background: rgba(255,255,255,0.2); border-radius: 10px; font-size: 0.8rem;">
+                <strong>How to Add Precious's Photos:</strong><br>
+                1. Replace placeholder images with Precious's photos<br>
+                2. Change the "src" attribute in img tags<br>
+                3. You can use:<br>
+                   &nbsp;&nbsp;- Local files: src="photos/precious1.jpg"<br>
+                   &nbsp;&nbsp;- Online files: src="https://yourlink.com/photo.jpg"<br>
+                4. Save and refresh to see changes!
+            </div>
         </footer>
     </div>
 
@@ -856,153 +940,104 @@
         setInterval(updateCountdown, 1000);
         updateCountdown();
         
-        // Music Player Simulation
-        const songs = [
-            "Happy Birthday - Stevie Wonder",
-            "Celebration - Kool & The Gang",
-            "Birthday - Katy Perry",
-            "Best Day of My Life - American Authors"
+        // Audio Controls
+        const audioElements = [
+            document.getElementById('audio1'),
+            document.getElementById('audio2'),
+            document.getElementById('audio3')
         ];
         
-        let currentSongIndex = 0;
-        let isPlaying = false;
-        let progress = 30;
+        let currentAudioIndex = 0;
         
-        document.getElementById('playBtn').addEventListener('click', function() {
-            isPlaying = true;
-            document.getElementById('songTitle').textContent = songs[currentSongIndex];
-            this.innerHTML = '<i class="fas fa-play"></i>';
-            
-            if (isPlaying) {
-                simulateProgress();
-            }
-        });
-        
-        document.getElementById('pauseBtn').addEventListener('click', function() {
-            isPlaying = false;
-            document.getElementById('playBtn').innerHTML = '<i class="fas fa-play"></i>';
-        });
-        
-        document.getElementById('nextBtn').addEventListener('click', function() {
-            currentSongIndex = (currentSongIndex + 1) % songs.length;
-            document.getElementById('songTitle').textContent = songs[currentSongIndex];
-            progress = 0;
-            updateProgressBar();
-            
-            if (isPlaying) {
-                simulateProgress();
-            }
-        });
-        
-        function simulateProgress() {
-            if (!isPlaying) return;
-            
-            if (progress < 100) {
-                progress += 0.5;
-                updateProgressBar();
-                setTimeout(simulateProgress, 100);
-            } else {
-                currentSongIndex = (currentSongIndex + 1) % songs.length;
-                document.getElementById('songTitle').textContent = songs[currentSongIndex];
-                progress = 0;
-                updateProgressBar();
-                if (isPlaying) {
-                    setTimeout(simulateProgress, 500);
-                }
-            }
-        }
-        
-        function updateProgressBar() {
-            document.getElementById('progressBar').style.width = progress + '%';
-        }
-        
-        // Video Section
-        const videoData = [
-            {
-                id: "W_slOnT1e_0",
-                title: "Happy Birthday Song",
-                thumbnail: "https://img.youtube.com/vi/W_slOnT1e_0/mqdefault.jpg",
-                description: "Traditional birthday celebration song"
-            },
-            {
-                id: "tH7QzHqFwfM",
-                title: "Birthday Dance Celebration",
-                thumbnail: "https://img.youtube.com/vi/tH7QzHqFwfM/mqdefault.jpg",
-                description: "Fun dance celebration for birthdays"
-            },
-            {
-                id: "N6WjTu4hq6I",
-                title: "Celebration Music Video",
-                thumbnail: "https://img.youtube.com/vi/N6WjTu4hq6I/mqdefault.jpg",
-                description: "Upbeat celebration music"
-            },
-            {
-                id: "V-_O7nl0Ii0",
-                title: "Birthday Party Ideas",
-                thumbnail: "https://img.youtube.com/vi/V-_O7nl0Ii0/mqdefault.jpg",
-                description: "Creative birthday celebration ideas"
-            }
-        ];
-        
-        let currentVideoIndex = 0;
-        
-        function initializeVideoSection() {
-            const playlist = document.getElementById('videoPlaylist');
-            
-            videoData.forEach((video, index) => {
-                const videoItem = document.createElement('div');
-                videoItem.className = `video-thumbnail ${index === 0 ? 'active' : ''}`;
-                videoItem.dataset.index = index;
-                videoItem.dataset.videoId = video.id;
-                
-                videoItem.innerHTML = `
-                    <img src="${video.thumbnail}" alt="${video.title}">
-                    <div class="play-icon"><i class="fas fa-play"></i></div>
-                    <div class="video-title">${video.title}</div>
-                `;
-                
-                videoItem.addEventListener('click', function() {
-                    document.querySelectorAll('.video-thumbnail').forEach(item => {
-                        item.classList.remove('active');
-                    });
-                    
-                    this.classList.add('active');
-                    loadVideo(this.dataset.videoId, this.dataset.index);
-                });
-                
-                playlist.appendChild(videoItem);
+        document.getElementById('playAllBtn').addEventListener('click', function() {
+            audioElements.forEach(audio => {
+                audio.pause();
+                audio.currentTime = 0;
             });
             
-            loadVideo(videoData[0].id, 0);
-        }
+            if (audioElements[0]) {
+                audioElements[0].play();
+                currentAudioIndex = 0;
+            }
+        });
         
-        function loadVideo(videoId, index) {
-            currentVideoIndex = parseInt(index);
-            const placeholder = document.getElementById('videoPlaceholder');
-            const youtubePlayer = document.getElementById('youtubePlayer');
-            
-            placeholder.style.display = 'none';
-            youtubePlayer.style.display = 'block';
-            youtubePlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0&modestbranding=1`;
-            
-            document.querySelector('.video-placeholder h3').textContent = videoData[currentVideoIndex].title;
-            document.querySelector('.video-placeholder p').textContent = videoData[currentVideoIndex].description;
-        }
+        document.getElementById('pauseAllBtn').addEventListener('click', function() {
+            audioElements.forEach(audio => {
+                audio.pause();
+            });
+        });
+        
+        document.getElementById('stopAllBtn').addEventListener('click', function() {
+            audioElements.forEach(audio => {
+                audio.pause();
+                audio.currentTime = 0;
+            });
+        });
+        
+        document.getElementById('volumeUpBtn').addEventListener('click', function() {
+            audioElements.forEach(audio => {
+                if (audio.volume < 1.0) {
+                    audio.volume = Math.min(1.0, audio.volume + 0.1);
+                }
+            });
+        });
+        
+        document.getElementById('volumeDownBtn').addEventListener('click', function() {
+            audioElements.forEach(audio => {
+                if (audio.volume > 0.0) {
+                    audio.volume = Math.max(0.0, audio.volume - 0.1);
+                }
+            });
+        });
+        
+        audioElements.forEach((audio, index) => {
+            audio.addEventListener('ended', function() {
+                if (index < audioElements.length - 1) {
+                    audioElements[index + 1].play();
+                    currentAudioIndex = index + 1;
+                }
+            });
+        });
         
         // Video Controls
-        document.getElementById('playVideoBtn').addEventListener('click', function() {
-            const youtubePlayer = document.getElementById('youtubePlayer');
-            const videoId = youtubePlayer.src.split('/').pop().split('?')[0];
+        const videoElements = [
+            document.getElementById('customVideo1'),
+            document.getElementById('customVideo2'),
+            document.getElementById('customVideo3')
+        ];
+        
+        const videoPlaceholder = document.getElementById('videoPlaceholder');
+        let currentVideoIndex = 0;
+        
+        document.querySelectorAll('.video-select-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const videoNum = parseInt(this.getAttribute('data-video'));
+                selectVideo(videoNum - 1);
+            });
+        });
+        
+        function selectVideo(index) {
+            videoElements.forEach(video => {
+                video.style.display = 'none';
+                video.pause();
+            });
+            videoPlaceholder.style.display = 'none';
             
-            if (videoId) {
-                youtubePlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+            if (videoElements[index]) {
+                videoElements[index].style.display = 'block';
+                currentVideoIndex = index;
+            }
+        }
+        
+        document.getElementById('playVideoBtn').addEventListener('click', function() {
+            if (videoElements[currentVideoIndex]) {
+                videoElements[currentVideoIndex].play();
             }
         });
         
         document.getElementById('pauseVideoBtn').addEventListener('click', function() {
-            const iframe = document.getElementById('youtubePlayer');
-            if (iframe) {
-                iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+            if (videoElements[currentVideoIndex]) {
+                videoElements[currentVideoIndex].pause();
             }
         });
         
@@ -1024,14 +1059,13 @@
             }
         });
         
-        // Initialize video section
-        initializeVideoSection();
+        selectVideo(0);
         
         // Enhanced Messages Data
         const messagesData = [
             {
                 id: 1,
-                name: "Mrs. Yisa",
+                name: "Mr. & Mrs. Yisa",
                 relationship: "Parents",
                 avatar: "https://images.unsplash.com/photo-1511988617509-a57c8a288659?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
                 message: "Our dearest Precious, from the moment you came into our lives, you've been a true blessing. Watching you grow into the brilliant, God-fearing young woman you are today fills our hearts with pride. May God continue to guide your steps and bless you abundantly.",
@@ -1040,7 +1074,7 @@
             },
             {
                 id: 2,
-                name: "Success Yisa",
+                name: "Sarah Yisa",
                 relationship: "Sister",
                 avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
                 message: "Happy Birthday sis! You're not just my sister but also my best friend. I admire your intelligence, your faith, and your kind heart. May this year bring you closer to all your dreams. Love you loads!",
@@ -1049,7 +1083,7 @@
             },
             {
                 id: 3,
-                name: "Mrs. Orelesi",
+                name: "David Johnson",
                 relationship: "AGGS Teacher",
                 avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
                 message: "Precious, it has been an absolute pleasure teaching you. Your dedication to your studies and your exemplary character make you a role model for other students. Wishing you continued success in all your endeavors.",
@@ -1067,16 +1101,16 @@
             },
             {
                 id: 5,
-                name: "Scholar",
-        
+                name: "Uncle James",
+                relationship: "Favorite Uncle",
                 avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-                message: "Precious! Watching you grow has been one of the joys of my life. Your intelligence and kind heart inspire everyone around you. May God's blessings overflow in your life today and always.",
+                message: "To my favorite niece, Precious! Watching you grow has been one of the joys of my life. Your intelligence and kind heart inspire everyone around you. May God's blessings overflow in your life today and always.",
                 quote: "Always making us proud",
                 date: "Today"
             },
             {
                 id: 6,
-                name: "Reverend Abiodun Sobayo",
+                name: "Pastor Michael",
                 relationship: "Church Pastor",
                 avatar: "https://images.unsplash.com/photo-1507591064344-4c6ce005-128?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80",
                 message: "Precious, your faith and commitment to God are truly inspiring. As you celebrate another year, remember that God has great plans for your life. Continue to shine your light and be a blessing to others.",
@@ -1094,7 +1128,7 @@
             },
             {
                 id: 8,
-                name: "Grandma",
+                name: "Grandma Ruth",
                 relationship: "Grandmother",
                 avatar: "https://images.unsplash.com/photo-1584302179602-e76e20f6c7e6?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
                 message: "My dear Precious, you bring so much joy to this family. Your name suits you perfectly because you are truly precious to us all. May God's grace surround you today and always. Love from your grandma.",
@@ -1132,7 +1166,6 @@
             });
         }
         
-        // Initialize messages section
         initializeMessagesSection();
         
         // Create Confetti
@@ -1177,7 +1210,7 @@
         
         // Birthday surprise message
         setTimeout(() => {
-            alert("🎉 Surprise! Happy Birthday Precious Yisa! 🎉\n\nMay your day be as wonderful as you are!\n\nScroll down to see messages from everyone who loves you!");
+            alert("🎉 Surprise! Happy Birthday Precious Yisa! 🎉\n\nMay your day be filled with joy, laughter, and wonderful memories!");
         }, 2000);
     </script>
 </body>
